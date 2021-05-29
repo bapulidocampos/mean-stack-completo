@@ -1,0 +1,44 @@
+
+
+<!-- formulario de publicaciones -->
+<!-- formulario de publicaciones -->
+
+
+<div id ="new-publication" class="col-lg-4 pull-left panel panel-default" *ngIf="this.identity._id!=this.user">
+<div class="alert alert-success" *ngIf="status=='success'">
+	Publicacion enviada correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status=='error'">
+	Publicacion no enviada
+</div>
+
+	<form #newPubForm="ngForm"(ngSubmit)="onSubmit(newPubForm,$event);" class="col-lg-10">
+
+	<p>
+		<label>Escribele un tips de alimentacion</label>
+		<textarea name="text" #text="ngModel"[(ngModel)]="publication.text" class="form-control" required></textarea>
+		<span *ngIf="!text.valid && text.touched">
+			El texto de la publicacion es obligatorio
+		</span>
+	</p>
+
+	<p>
+		<label>Sube tu foto</label>
+
+		<!-- fileInput es para darle un id y poder resetear el subir imagen-->
+		<input #fileInput type="file" placeholder="subir imagen"(change)="fileChangeEvent($event)"/>
+	</p>
+	<input type="submit" value="Enviar" class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	</form>	
+</div>
+
+<!--      AQUI VIENE EL FORMULARIO DE TIPS ALIMENTACION                                    -->
+
+
+
+
+
+
+
+
+

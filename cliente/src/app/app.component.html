@@ -1,0 +1,217 @@
+<!--navigator para que se adapte al 100 % de la pantalla
+12 full widt
+11 98 pantalla -->
+
+<div class="navigation col-lg-12">
+<!-- clase nav es para crear barra de navegacion
+barra navegacion por defecto es de bootstrap
+-->
+<nav class="navbar navbar-default">
+<!-- -->
+<div class="container-fluid">
+<!-- nombre de la web-->
+<div class="navbar-header">
+<!-- -->
+<a href="#" class="navbar-brand">{{title}}</a>
+</div>
+<!--*ngif="identity" 
+<div class="nav navbar-nav" *ngIf="!identity"> -->
+<ul class="nav navbar-nav" *ngIf="identity" >
+  <li>
+    <a [routerLink]="['/home']"[routerLinkActive]="['active']">
+      <span class="glyphicon glyphicon-home"></span>
+      Inicio
+</a>
+  </li>
+
+ <li>
+    <a  [routerLink]="['/timeline']"[routerLinkActive]="['active']"> 
+      <span class="glyphicon glyphicon-th-list"></span>
+      TimeLine
+</a>
+  </li>
+
+   <li>
+    <a [routerLink]="['/gente']"[routerLinkActive]="['active']"*ngIf="identity.role=='ROLE_ADMIN' || identity.role=='ROLE_TRAINER'">
+      <span class="glyphicon glyphicon-user"></span>
+      Gente
+</a>
+  </li>
+
+<li>
+    <a [routerLink]="['/mensajes']"[routerLinkActive]="['active']">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Mensajes
+</a>
+  </li>
+<li>
+    <a [routerLink]="['/registro']"[routerLinkActive]="['active']"  *ngIf="identity.role=='ROLE_ADMIN'">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Registro
+</a>
+  </li>
+
+<!--
+  <li>
+    <a [routerLink]="['/exercise']"[routerLinkActive]="['active']"*ngIf="identity.role=='ROLE_ADMIN' || identity.role=='ROLE_TRAINER'">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Ejercicios
+</a>
+  </li>
+-->
+
+  <li>
+    <a [routerLink]="['/exercise_get']"[routerLinkActive]="['active']">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Ejercicios
+</a>
+  </li>
+  <!--
+    <li>
+    <a [routerLink]="['/bicep']"[routerLinkActive]="['disable']">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Bicep
+</a>
+  </li>
+-->
+
+<!--
+ <li>
+    <a [routerLink]="['/imc']"[routerLinkActive]="['disable']">
+      <span class="glyphicon glyphicon-envelope"></span>
+      imc
+</a>
+  </li>
+-->
+
+<li>
+    <a [routerLink]="['/imc_get']"[routerLinkActive]="['disable']">
+      <span class="glyphicon glyphicon-envelope"></span>
+      imc
+</a>
+  </li>
+
+
+  <li>
+    <a [routerLink]="['/perfil/',this.identity._id]"[routerLinkActive]="['disable']"*ngIf="identity.role!='ROLE_ADMIN'">
+      <span class="glyphicon glyphicon-envelope"></span>
+      Mis avances 
+</a>
+  </li>
+
+
+<!--
+   <li>
+          <a [routerLink]="['/perfil',identity._id]">
+            <span class="glyphicon glyphicon-user"></span>
+            Mi perfil
+          </a>
+    </li>
+
+-->
+
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+Categoria de Ejercicios <spam class="caret"></spam>
+</a>
+
+
+<ul class="dropdown-menu">
+       <li>
+          <a  [routerLink]="['/bicep']">
+            <span class="glyphicon glyphicon-user"></span>
+            Bicep
+          </a>
+         </li>
+      <li>
+          <a [routerLink]="['/tricep']">
+             <span class="glyphicon glyphicon-cog"></span>
+            Tricep
+          </a>
+         </li>
+              <li>
+          <a [routerLink]="['/cardio']">
+             <span class="glyphicon glyphicon-log-out"></span>
+            Cardio
+          </a>
+         </li>
+       </ul>
+      </li>
+
+
+
+
+</ul>
+
+
+<ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">
+
+ <li>
+    <a [routerLink]="['/login']"[routerLinkActive]="['active']">
+      <span class="glyphicon glyphicon-log-in"></span>
+      Login
+</a>
+  </li>
+<!--
+   <li>
+    <a [routerLink]="['/registro']"[routerLinkActive]="['active']">
+      <span class="glyphicon glyphicon-user"></span>
+      Registro
+</a>
+  </li>
+-->
+</ul>  
+
+
+
+
+<ul class="nav navbar-nav navbar-right" *ngIf="identity">
+<li class="avatar">
+<!--  cargar imagen de usuario                        -->
+<img src="{{url + 'get-image-user/'+identity.image}}" *ngIf="identity && identity.image"/>
+
+</li>
+
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"*ngIf="identity.role=='ROLE_TRAINER'">
+{{identity.name}}  (TRAINER) <spam class="caret"></spam>
+</a>
+ <a class="dropdown-toggle" data-toggle="dropdown" href="#"*ngIf="identity.role=='ROLE_USER'">
+{{identity.name}}  (USUARIO) <spam class="caret"></spam>
+</a>
+ <a class="dropdown-toggle" data-toggle="dropdown" href="#" *ngIf="identity.role=='ROLE_ADMIN'">
+{{identity.name}}  (ADMIN) <spam class="caret"></spam>
+</a>
+
+<ul class="dropdown-menu">
+       <li>
+          <a [routerLink]="['/perfil',identity._id]">
+            <span class="glyphicon glyphicon-user"></span>
+            Mi perfil
+          </a>
+         </li>
+      <li>
+          <a [routerLink]="['/mis-datos']">
+             <span class="glyphicon glyphicon-cog"></span>
+            Mis datos
+          </a>
+         </li>
+              <li>
+          <a class="pointer"(click)="logout()">
+             <span class="glyphicon glyphicon-log-out"></span>
+            Cerrar sesion
+          </a>
+         </li>
+       </ul>
+      </li>
+     </ul>
+
+
+
+    </div>
+  </nav>
+
+
+</div>
+
+<router-outlet></router-outlet>

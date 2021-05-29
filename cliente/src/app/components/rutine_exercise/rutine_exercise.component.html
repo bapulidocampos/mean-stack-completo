@@ -1,0 +1,133 @@
+
+
+
+
+
+<!-- formulario de publicaciones -->
+
+<!-- <label>RUTINA DE EJERCICIO  </label>  -->
+
+
+
+<div id ="new-publication" class="col-lg-4 pull-left panel panel-default"*ngIf="this.identity._id!=this.user"  >
+	
+	<div class="alert alert-success" *ngIf="status=='success'">
+		Rutina de ejercicio enviada correctamente
+	</div>
+	<div class="alert alert-danger" *ngIf="status=='error'">
+		{{mensaje}}. Rutina de ejercicio no enviada
+	</div>
+
+
+	<form #newPubForm="ngForm" class="col-lg-10">
+<!--
+(ngSubmit)="onSubmit(newPubForm,$event);"
+
+		<p>
+			<label>Instruccion del ejercicio</label>
+			<textarea name="text" #text="ngModel"[(ngModel)]="publication.text" class="form-control" required></textarea>
+			<span *ngIf="!text.valid && text.touched">
+				El texto de la publicacion es obligatorio
+			</span>
+		</p>
+-->
+		<p>
+			<label>Instruccion del ejercicio</label>
+			<textarea name="instruccion"  id="instruccion" class="form-control" required></textarea>
+			
+		</p>
+
+
+	
+
+		<p>
+			  <label>Ejercicio 1 </label>
+	           
+							 <select *ngIf="follows" id="ejercicio"name="ejercicio"
+							 >
+							  <option *ngFor="let follow of follows" value="{{follow._id}}">
+							  {{follow.name}}</option>
+							
+							</select>
+	               <br>
+									<button class="btn btn-success  "(click)="onSubmitelunes()"  >
+									Asignar
+									</button> 
+	               
+			
+		</p>
+		<div *ngFor="let publication of instruccioness">
+			{{publication}} 
+		</div>
+	<!--
+		<div  *ngFor="let publicatio of ejercicioss" >
+			{{publicatio}}
+		</div>
+	-->
+		<!--
+		<p>
+			  <label>Ejercicio 2 </label>
+	           
+							 <select *ngIf="follows" name="ejercicio2"#ejercicio2="ngModel" 
+							 [(ngModel)]="publication.ejercicio2"
+							 >
+							  <option *ngFor="let follow of follows" value="{{follow._id}}">
+							  {{follow.name}}</option>
+							
+							</select>
+	               
+		
+			
+		</p>
+		<p>
+			  <label>Ejercicio 3 </label>
+	           
+							 <select *ngIf="follows" name="ejercicio3"#ejercicio3="ngModel" 
+							 [(ngModel)]="publication.ejercicio3"
+							 >
+							  <option *ngFor="let follow of follows" value="{{follow._id}}">
+							  {{follow.name}}</option>
+							
+							</select>
+	               
+		
+			
+		</p>
+		<p>
+			  <label>Ejercicio 4 </label>
+	           
+							 <select *ngIf="follows" name="ejercicio4"#ejercicio4="ngModel" 
+							 [(ngModel)]="publication.ejercicio4"
+							 >
+							  <option *ngFor="let follow of follows" value="{{follow._id}}">
+							  {{follow.name}}</option>
+							
+							</select>
+	               
+		
+			
+		</p>
+		<p>
+			  <label>Ejercicio 5 </label>
+	           
+							 <select *ngIf="follows" name="ejercicio5"#ejercicio5="ngModel" 
+							 [(ngModel)]="publication.ejercicio5"
+							 >
+							  <option *ngFor="let follow of follows" value="{{follow._id}}">
+							  {{follow.name}}</option>
+							
+							</select>
+	               
+		
+			
+		</p>
+	-->
+		<input type="submit" value="Enviar" (click)="onSubmit(newPubForm,$event)"class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	</form>	
+</div>
+
+
+<!--      AQUI VIENE EL FORMULARIO DE TIPS ALIMENTACION                                    -->
+
+
+

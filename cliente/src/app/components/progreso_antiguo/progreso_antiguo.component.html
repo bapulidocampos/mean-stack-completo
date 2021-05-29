@@ -1,0 +1,50 @@
+<div class="container mt-5 pt-5">
+	<div class="col-12">
+		<div class="row">
+			<div class="col-5 pl-5 mt-5">
+			<h1>line sharp</h1>
+			<br>
+			<h3>shufle data</h3>
+			<br>
+			<button class="btn"></button>
+			</div>
+  			<div class="col-7">
+				<div class="chart-wrapper">
+				  <canvas baseChart
+				      
+				      [datasets]="lineChartData"
+				      [labels]="lineChartLabels"
+				      [colors]="lineChartColors"
+				      [options]="lineChartOptions"
+				      [legend]="lineChartLegend"
+				      [chartType]="lineChartType"
+				      [plugins]="lineChartPlugins"
+				      (chartHover)="chartHovered($event)"
+				      (chartClick)="chartClicked($event)"> 
+				  </canvas>
+				</div>
+
+			</div>
+
+		</div>
+	
+	</div>	
+</div>
+
+<!--
+<div style="display: block">
+  <canvas baseChart
+      [chartType]="chartType"
+      [datasets]="chartDatasets"
+      [labels]="chartLabels"
+      [colors]="chartColors"
+      [options]="chartOptions"
+      [legend]="true"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+  </canvas>
+</div>
+-->
+
+<p>hola parceriton </p>
+<!---->

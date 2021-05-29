@@ -1,0 +1,247 @@
+<div class="col-lg-12">
+<h1 class="h1-strong">{{title}}
+<button class="btn btn-success pull-right" (click)="refresh($event)" *ngIf="!noMore">
+			Mostrar nuevas
+		</button>
+</h1>
+
+<div id="publications">
+	<div *ngFor="let publication of publications" class="item-publication">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<!--
+							
+<div>{{publication.user.image}}</div>   
+{{ url +'get-image-user/' + publication.user.image}}
+http://localhost:3800/api/uploads/publications/Coffee.mp4'+image_file../../assets/Coffee.mp4
+	<video autoplay controls loop>
+			<source src="{{ url +'get-image-user/' + publication.user.image}}" type="video/mp4">
+					</video>
+
+					<video autoplay controls loop>
+			<source src="{{ url +'get-image-user/' + publication.user.image}}" type="video/mp4">
+				{{publication.user.image}}
+					</video>
+							-->
+				
+	
+						
+
+
+
+<div class="image-user pull-left">
+								
+									<a href="#">
+									
+							
+
+								<img src="{{ url +'get-image-user/' + publication.trainer.image}}" *ngIf="publication.user.image"/>
+
+								<img src="assets/user.png" class="avatar-default"*ngIf="!publication.user.image"/>
+
+						
+
+								
+									</a>
+								</div>
+				
+
+
+
+
+
+				
+
+				<div>
+			
+			
+					<a class="user-name"[routerLink]="['/perfil',publication.user._id]" >
+					{{publication.trainer.name + ' ' + publication.trainer.surname}}
+
+					</a>
+
+					&nbsp;|&nbsp;
+					<span class="date">
+					{{ (publication.created_at | amFromUnix) | amLocale: 'es' | amTimeAgo}} 
+				<!--	{{ publication.created_at | amLocale: 'es'|   amTimeAgo}}-->
+	              
+					</span>  
+					
+				</div>
+
+				
+				<h4 class="publication-text pull-left">
+					{{publication.text }}
+				
+
+				</h4>
+				<br/>
+				<br/>
+				<!--
+				<h4 class="publication-text pull-left "*ngIf="publication.comentario!='null'">
+					{{publication.comentario }}
+				
+
+				</h4>
+			-->
+		<!--	
+				<br/>
+				<br/>
+	<p *ngIf="publication.comentario && publication.comentario!='null'">
+		<label>Quieres comentar algo</label>
+		<textarea name="texto" #text="ngModel"[(ngModel)]="publication.comentario" class="form-control" required>{{publication._id}}</textarea>
+		<span *ngIf="!text.valid && text.touched">
+			El texto de la publicacion es obligatorio
+		</span>
+	</p>
+	<p>
+		<button class="btn btn-success"(click)="split(publication._id,publication.comentario)">
+			Comentar
+		</button>
+	</p> 
+	--> 
+
+
+<!--
+Aqui va la tabla
+-->
+				<div class="pull-right"*ngIf="publication.user._id != identity._id">
+						&nbsp;
+					<!-- Button HTML (to Trigger Modal) -->
+					<a href="#myModal{{publication._id}}" class="btn btn-large btn-danger"
+					 data-toggle="modal"*ngIf="showImage!=publication._id">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+					    
+					<!-- Modal HTML -->
+					<div id="myModal{{publication._id}}" class="modal fade">
+					    <div class="modal-dialog">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title">¿Estas Seguro que  quieres eliminar la publicacion?</h5>
+					                <button type="button" class="close" data-dismiss="modal">&times;</button>
+					            </div>
+					            <div class="modal-body">
+					                <p>Si la borras no podras recuperarla</p>
+					             <p>{{publication.text}}</p>
+					            </div>
+					            <div class="modal-footer">
+					                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					                <button type="button" class="btn btn-primary"(click)="deletePublication(publication._id)"data-dismiss="modal">Borrar la publicacion</button>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+
+
+				
+				</div>
+
+
+<!--*ngIf="publication.file != 'null'&& publication.filev == 'null'
+|| publication.file == 'null'&& publication.filev != 'null'|| publication.file != 'null'
+				"-->
+				<div class="pull-right">
+					<button class="btn btn-warning pull-right"(click)="showThisImage(publication._id)" 
+					*ngIf="showImage!=publication._id">
+						<span class="glyphicon glyphicon-picture"></span>
+					</button>
+
+				
+
+					<button class="btn btn-danger pull-right"(click)="hideThisImage(publication._id)" 
+					*ngIf="showImage==publication._id">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					</button>
+				</div>
+				<!--- *ngIf="publication.file !='null' && publication.filev =='null' && showImage==publication._id ||publication.filev !='null' && publication.file=='null'&& showImage==publication._id "-->
+				<div class="col-lg-12"*ngIf="showImage==publication._id ">
+					
+						<br/>
+						<img *ngIf="publication.file !='null' && publication.filev =='null'" src="{{url+'get-image-pub/'+publication.file}}"class="col-lg-12" />
+						<video  *ngIf="publication.filev !='null'&& publication.file =='null'" width="450" height="240" autoplay controls loop  >
+						<source src="{{url+'get-image-pub/'+publication.filev}}" type="video/mp4">
+
+						</video>
+								<!-- <td>{{publication.text}}</td>-->
+
+						
+
+										<table class="table">
+								  <thead>
+								    <tr>
+								      <th scope="col">#</th>
+								      <th scope="col">Lunes</th>
+								      <th scope="col">Martes</th>
+								      <th scope="col">Miercoles</th>
+								      <th scope="col">Jueves</th>
+								      <th scope="col">viernes</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <tr>
+								      <th scope="row">1</th>
+								<td>{{publication.lunes[0]}}</td>
+								   <td>{{publication.martes[0]}}</td>
+								      <td>{{publication.miercoles[0]}}</td>
+								        <td>{{publication.jueves[0]}}</td>
+								            <td>{{publication.viernes[0]}}</td>
+								    </tr>
+								    <tr>
+								      <th scope="row">2</th>
+								    <td>{{publication.lunes[1]}}</td>
+								     <td>{{publication.martes[1]}}</td>
+								      <td>{{publication.miercoles[1]}}</td>
+								       <td>{{publication.jueves[1]}}</td>
+								       <td>{{publication.viernes[1]}}</td>
+								    </tr>
+								    <tr>
+								      <th scope="row">3</th>
+								      <td>{{publication.lunes[2]}}</td>
+								      <td>{{publication.martes[2]}}</td>
+								      <td>{{publication.miercoles[2]}}</td>
+								      <td>{{publication.jueves[2]}}</td>
+								      <td>{{publication.viernes[2]}}</td>
+								    </tr>
+								   
+								    
+								  </tbody>
+								</table>
+							
+	
+				</div>
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-lg-12 text-center"*ngIf="publications && publications.length">
+	<p>
+		<button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+			Ver mas publicaciones
+		</button>
+	</p> 
+</div>
+ 
+
+
+</div>
+<!-- output vamos a enviar una variables desde el sidebar 
+al componente padre que seria timeline
+Luego del timeline le voy a pasar al otro  componente publication algun valor
+-->
+ 
+<!--   <diet (sended)="refresh($event)"></diet>  -->
+
+
+<!--aqui va sidebar -->
+
+
+
+<div class="clearfix"></div>
+

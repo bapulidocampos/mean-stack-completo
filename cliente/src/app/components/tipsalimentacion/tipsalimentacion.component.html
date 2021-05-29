@@ -1,0 +1,180 @@
+
+
+
+
+
+<!-- Aqui va si esta mirando mi propio perfil logueado  -->
+
+
+<div id="publications pull-left" >
+	<div *ngFor="let publication of publications" class="item-publication">
+		<div class="panel panel-default">
+			<div class="panel-body">
+
+							<div class="image-user pull-left">
+									<a href="#">
+								<img src="{{ url +'get-image-user/' + publication.entrenador.image}} "*ngIf="publication.entrenador.image"/>
+								<img src="assets/user.png" class="avatar-default"*ngIf="!publication.entrenador.image"/>
+									</a>
+								</div>
+
+				<div>
+					<span class="user-name">
+					{{publication.entrenador.name + ' ' + publication.entrenador.surname}}
+
+					</span>
+
+					&nbsp;|&nbsp;
+			
+
+						<span class="date">
+					{{ (publication.created_at | amFromUnix) | amLocale: 'es' | amTimeAgo}} 
+				<!--	{{ publication.created_at | amLocale: 'es'|   amTimeAgo}}-->
+	              
+					</span>  
+					
+				</div>
+
+				
+				<h4 class="publication-text pull-left">
+					{{publication.text }}
+				
+
+				</h4>
+
+				
+				
+
+				<div class="pull-right"*ngIf="publication.user._id != identity._id">
+						&nbsp;
+					<!-- Button HTML (to Trigger Modal) -->
+					<a href="#myModal{{publication._id}}" class="btn btn-large btn-danger"
+					 data-toggle="modal"*ngIf="showImage!=publication._id">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+					    
+					<!-- Modal HTML -->
+					<div id="myModal{{publication._id}}" class="modal fade">
+					    <div class="modal-dialog">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title">¿Estas Seguro que  quieres eliminar la publicacion?</h5>
+					                <button type="button" class="close" data-dismiss="modal">&times;</button>
+					            </div>
+					            <div class="modal-body">
+					                <p>Si la borras no podras recuperarla</p>
+					             <p>{{publication.text}}</p>
+					            </div>
+					            <div class="modal-footer">
+					                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					                <button type="button" class="btn btn-primary"(click)="deletePublication(publication._id)"data-dismiss="modal">Borrar la publicacion</button>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+
+
+				
+				</div>
+
+
+<!--pull right-->
+<div class="pull-right"*ngIf="publication.file != 'null'&& publication.filev == 'null'
+|| publication.file == 'null'&& publication.filev != 'null'|| publication.file != 'null'
+				">
+					<button class="btn btn-warning pull-right"(click)="showThisImage(publication._id)" 
+					*ngIf="showImage!=publication._id">
+
+						<span class="glyphicon glyphicon-picture"></span>
+					</button>
+
+				
+
+					<button class="btn btn-danger pull-right"(click)="hideThisImage(publication._id)" 
+					*ngIf="showImage==publication._id">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					</button>
+</div>
+				<div class="col-lg-12" *ngIf="publication.file !='null' && publication.filev =='null' && showImage==publication._id ||publication.filev !='null' && publication.file=='null'&& showImage==publication._id ">
+					
+						<br/> 
+						<img *ngIf="publication.file !='null' && publication.filev =='null'" src="{{url+'get-image-tips/'+publication.file}}"class="col-lg-12" />
+						<video  *ngIf="publication.filev !='null'&& publication.file =='null'" width="450" height="240" autoplay controls loop  >
+						<source src="{{url+'get-image-tips/'+publication.filev}}" type="video/mp4">
+
+						</video>
+	
+				</div>
+
+
+
+
+
+
+
+
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- Aqui va si esta mirando mi propio perfil logueado  -->
+<!--
+<div id ="new-publication" class="col-lg-4 pull-right panel panel-default"*ngIf="this.identity._id!=this.user">
+<div class="alert alert-success" *ngIf="status=='success'">
+	Publicacion enviada correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status=='error'">
+	Publicacion no enviada
+</div>
+ 	<form #newPubForm="ngForm"(ngSubmit)="onSubmit(newPubForm,$event);" class="col-lg-10">
+ 	-->
+<!--	<div id ="new-publication" class="col-lg-4 pull-left panel panel-default "> 
+<form #newPubForm="ngForm"(ngSubmit)="onSubmit(newPubForm,$event);"id="user-card" class="col-lg-4  panel-default pull-right" >-->
+
+<!--
+	<p>
+		<label>Que esta pensando? tips de alimentacion component</label>
+		<textarea name="text" #text="ngModel"[(ngModel)]="publication.text" class="form-control" required></textarea>
+		<span *ngIf="!text.valid && text.touched">
+			El texto de la publicacion es obligatorio
+		</span>
+	</p>
+
+	<p>
+		<label>Sube tu foto</label>
+	-->
+		<!-- fileInput es para darle un id y poder resetear el subir imagen-->
+		<!--
+		<input #fileInput type="file" placeholder="subir imagen"(change)="fileChangeEvent($event)"/>
+	</p> 
+	<input type="submit" value="Enviar" class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	</form>	
+
+</div>
+-->
+<!--registro de -->
+
+
+
+
+
+<button class="btn btn-success pull-left"(click)="vector()"  >
+			llevar vector
+		</button>
+	
+
+
+
+
+<div class="col-lg-12 text-center" >
+	<p>
+		<button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+			Ver mas publicaciones
+		</button>
+	</p> 
+</div>
+ 

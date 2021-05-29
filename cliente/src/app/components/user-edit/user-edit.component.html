@@ -1,0 +1,111 @@
+
+<div class="col-lg-5">
+<h1 class="h1-strong">{{title}}</h1>
+
+<div class="alert alert-success" *ngIf="status == 'success'">
+Se han actualizado tus datos correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status == 'error'">
+No se han podido actualizar tus datos!!
+</div>
+<form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+
+		<p>
+<label>Nombre</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class=
+"form-control" required/>
+			<span *ngIf="!name.valid && name.touched">
+			El nombre es obligatorio!!
+			</span>
+		</p>
+
+
+			<p>
+<label>Apellidos</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class=
+"form-control" required/>
+			<span *ngIf="!surname.valid && surname.touched">
+			Los apellidos es obligatorio!!
+			</span>
+		</p>
+
+<p>
+<label>Fecha de nacimiento</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="date" name="date_birth" #date_birth="ngModel" [(ngModel)]="user.date_birth" class=
+"form-control" required/>
+			<span *ngIf="!date_birth.valid && date_birth.touched">
+			La fecha de nacimiento es obligatoria!!
+			</span>
+		</p>
+
+
+
+			<p>
+<label>Apodo</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class=
+"form-control" required/>
+			<span *ngIf="!nick.valid && nick.touched">
+			El apodo es obligatorio!!
+			</span>
+		</p>
+
+
+<p>
+<label>Sexo</label>
+<!--
+<input type="text" name="role" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required/>-->
+
+<select name="select" #sexo="ngModel" [(ngModel)]="user.sexo" class=
+"form-control" required >
+  <option value="masculino">masculino</option>
+  <option value="femenino" >femenino</option>
+</select>
+  <!--selected-->
+			<span *ngIf="!sexo.valid && sexo.touched">
+			El campo sexo  es obligatorio!!
+			</span>
+		</p>
+
+			<p>
+<label>Correo electronico</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class=
+"form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+			<span *ngIf="!email.valid && email.touched">
+			El correo no es correcto!!
+			</span>
+		</p>
+
+<div *ngIf="user.image">
+	<!--metodo que creamos antes para mostrar la imagen-->
+	<img src="{{url + 'get-image-user/' + user.image}}"/>
+	
+</div>
+
+<p>
+	<label>Sube tu avatar</label>
+<input type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />	
+</p>
+
+<input type="submit" value="{{title}}" class="btn btn-success"[disabled]=
+"!userEditForm.form.valid"/>
+
+
+
+
+</form>
+
+
+
+</div>
+

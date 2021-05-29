@@ -1,0 +1,138 @@
+<div class="col-lg-4 sidebar-32">
+<h1 class="h1-strong">Mis Datos</h1>
+</div>
+<div id="user-card" class="col-lg-4 panel panel-default pull-left">
+<div class="avatar pull-left">
+	<!-- url + metodo que devuelve la imagen + concatenar el nombre de la imagen del usuario  -->
+<img src="{{ url + 'get-image-user/' + identity.image }}" *ngIf="identity.image"/>
+<img src="assets/user.png" *ngIf="!identity.image"/>
+</div>
+
+<div class="name-surname pull-left">
+		<a [routerLink]="['/perfil',identity._id]"class="username"> 
+	{{identity.name + ' '+ identity.surname}}
+	</a>
+	<p class="nickname">{{identity.nick}}</p>
+	<div class="clearfix"></div>
+</div>
+
+
+<!-- se limpie los flotados-->
+<div class="clearfix"></div>
+<div class="stats" *ngIf="stats">
+	<div class="following-data">
+<a [routerLink]="['/siguiendo',identity._id,1]"> 
+			<span class="label-stats">
+				<!--Siguiendo-->
+				Mensaje
+			</span>
+			<!--
+			<span class="number-stats">
+				{{stats.following}}
+			</span>
+		-->
+		</a>
+	</div>
+
+	<div class="following-data">
+	<a [routerLink]="['/seguidores',identity._id,1]"> 
+			<span class="label-stats">
+				<!--Seguidores-->
+				Imc
+
+			</span>
+<!--
+			<span class="number-stats">
+				{{stats.followed}}
+			</span>
+		-->
+		</a>
+	</div>
+
+	<div class="following-data">
+<a [routerLink]="['/perfil',identity._id]"> 
+			<span class="label-stats">
+				Publicaciones
+			</span>
+			<!--
+			<span class="number-stats">
+				{{stats.publications}}
+			</span>
+		-->
+		</a>
+	</div>
+</div>
+
+
+</div>
+<!-- formulario de publicaciones -->
+
+
+<div id ="new-publication" class="col-lg-4 pull-left panel panel-default ">
+<div class="alert alert-success" *ngIf="status=='success'">
+	Publicacion enviada correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status=='error'">
+	Publicacion no enviada
+</div>
+<!--  (ngSubmit)="onSubmit(newPubForm,$event);"     -->
+	<form #newPubForm="ngForm" class="col-lg-10">
+
+	<p>
+		<label>Como va el progreso? estoy en food </label>
+		<textarea name="text" #text="ngModel"[(ngModel)]="publication.text" class="form-control" required></textarea>
+		<span *ngIf="!text.valid && text.touched">
+			El texto de la publicacion es obligatorio
+		</span>
+	</p>
+<p>
+<label>Ingredientes</label>
+<!--
+<input type="text" name="role" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required/>-->
+
+<select name="select" id="martes"  class=
+"form-control" required >
+  <option value="mani">mani</option>
+  <option value="leche" >leche</option>
+   <option value="queso">queso</option>
+    <option value="tomate">tomate</option>
+  <option value="cebolla" >cebolla</option>
+   <option value="zanahoria">zanahoria</option>
+</select>
+  <!--selected-->
+			
+	<button class="btn btn-success  "(click)="onSubmitemartes()"  >
+							Asignar
+		</button> 
+</p>
+     <div *ngFor="let publication of martescomida" >
+			{{publication}}
+		</div>
+
+
+
+
+
+
+
+
+
+	<p>
+		<label>Sube tu foto</label>
+		<!-- fileInput es para darle un id y poder resetear el subir imagen-->
+		<input #fileInput type="file" placeholder="subir imagen"(change)="fileChangeEvent($event)"/>
+	</p>
+	<input type="submit" value="Enviar"  (click)="onSubmit(newPubForm,$event)"class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	</form>	
+</div>
+
+
+
+
+
+
+
+
+
+

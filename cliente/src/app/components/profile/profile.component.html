@@ -1,0 +1,184 @@
+<div class="col-lg-8">
+<h1 class="h1-strong">{{title}}
+</h1>
+
+
+	<div id="data-profile" *ngIf="user">
+		<div class="avatar pull-left">
+			<a href="#">
+				<img src="{{ url +'get-image-user/' + user.image}} "*ngIf="user.image"/>
+				<img src="assets/user.png" *ngIf="!user.image"/>
+			</a>
+		</div>
+
+<!--
+
+		<div class="user-name pull-left">
+			<div class="label label-default pull-left" *ngIf="followed">
+							Te sigue 
+			</div>
+			<div class="clearfix"></div>
+			<div class="pull-left">
+				<p class="name">	{{user.name + ' ' + user.surname }}</p>
+				<p class="nick">	{{user.nick }}</p>
+			</div>
+			<div class="clearfix"></div>
+					<div class="follow pull-left">
+						
+
+						<button class="btn btn-success" *ngIf="!following"(click)="followUser(user._id)">
+							Seguir
+						</button>
+						<button class="btn btn-primary" *ngIf="following"(click)="unfollowUser(user._id)" (mouseenter)="mouseEnter(user._id)"
+						(mouseleave)="mouseLeave()"
+						[class.btn-danger]="user._id == followUserOver"
+
+						>
+-->
+<!--    si el user._id del usuario que acutalmente que tenemos del perfil es igual  followUserOver   la variable que nos llega desde el componente  Y SINO QUE EJECUTE EL OTRO BOTON   que va estar en la etiqueta following                                                          -->
+<!--						<span *ngIf="user._id == followUserOver; else following">
+
+							Dejar de Seguir
+							</span>
+-->
+							<!--cuando pase por el ELSE nos va a cargar esta template-->
+<!--
+							<ng-template #following>
+								Siguiendo
+							</ng-template>
+						</button>
+					</div>
+
+
+		</div>
+-->
+
+
+<div class="stats pull-left" *ngIf="stats">
+<!--
+	<div class="following-data">
+		<a [routerLink]="['/siguiendo',user._id,1]">
+			<span class="label-stats">
+				Siguiendo 
+			</span>
+			<span class="number-stats">
+				{{stats.following}}
+			</span>
+		</a>
+	</div>
+-->
+<!--
+	<div class="following-data">
+<a [routerLink]="['/seguidores',user._id,1]"> 
+			<span class="label-stats">
+				Seguidores
+			</span>
+			<span class="number-stats">
+				{{stats.followed}}
+			</span>
+		</a>
+	</div>
+
+-->
+
+	<div class="following-data">
+		<a [routerLink]="['/perfil',identity._id]"> 
+			<span class="label-stats">
+				Publicaciones
+			</span>
+			<span class="number-stats">
+				{{stats.publications}}
+			</span>
+		</a>
+	</div>
+</div>
+<br/>
+<br/>
+<div class="col-lg-12  " >
+
+		<button class="btn btn-success pull-left "(click)="mostrarimc()"  >
+			Ver IMC
+		</button>
+	
+
+		<button class="btn btn-success  pull-left "(click)="mostrarpublication()"  >
+			Ver Publication
+		</button>
+	
+		
+		<button class="btn btn-success pull-left "(click)="mostrartipsalimentacion()"  >
+			Ver Tips alimentacion
+		</button>
+		<button class="btn btn-success pull-left"(click)="mostrarrutineexercise()"  >
+			Ver Rutina de ejercicios
+		</button>
+	
+	<button class="btn btn-success pull-left"(click)="mostrarprogreso()"  >
+			Ver Progreso
+		</button>
+		<button class="btn btn-success pull-left"(click)="mostrardieta()"  >
+			Ver Dieta
+		</button>
+</div> 
+
+
+		<div class="col-lg-12 publications" *ngIf="user">
+			<br/>
+			<br/>
+		
+
+
+				<publications [user]="user._id" *ngIf=" !progreso && !rutineexercise && variablepublication && !variableimc && !tips  && !dieta "></publications> 
+				<imcs [user]="user._id" *ngIf=" !progreso && !rutineexercise && !variablepublication && variableimc && !tips && !dieta "></imcs>
+				<progreso [user]="user._id" *ngIf=" progreso && !rutineexercise && !variablepublication && !variableimc && !tips && !dieta "></progreso>
+			
+			
+               <tipsalimentacion [user]="user._id" *ngIf=" !progreso && !rutineexercise && !variablepublication && !variableimc && tips  && !dieta "></tipsalimentacion>
+                <!--<tip [user]="user._id" *ngIf=" !progreso && !rutineexercise && !variablepublication && !variableimc && tips"></tip>-->
+
+                
+               <rutine_exercise_get [user]="user._id" *ngIf="!progreso && rutineexercise && !variablepublication && !variableimc && !tips && !dieta " ></rutine_exercise_get>
+
+
+
+               <dieta_get [user]="user._id" *ngIf="!progreso && !rutineexercise && !variablepublication && !variableimc && !tips && dieta " ></dieta_get>
+           
+           <!-- <rutine_exercise [user]="user._id" *ngIf="!progreso && rutineexercise && !variablepublication && !variableimc && !tips "></rutine_exercise>  
+           -->
+
+		</div>
+
+
+	</div>
+
+			
+ 
+</div>
+
+
+ <div >
+	
+    <cuadro_datos ></cuadro_datos>
+</div>
+
+		
+
+
+
+	<div  *ngIf="user">
+    <tip [user]="user._id"*ngIf=" !progreso && !rutineexercise && !variablepublication && !variableimc && tips  && !dieta "></tip>
+</div>
+ 
+<div  *ngIf="user">
+<rutine_exercise [user]="user._id" *ngIf="!progreso && rutineexercise && !variablepublication && !variableimc && !tips && !dieta "></rutine_exercise>  
+
+
+</div>
+
+<div  *ngIf="user">
+<diet [user]="user._id" *ngIf="!progreso && !rutineexercise && !variablepublication && !variableimc && !tips && dieta "></diet> 
+</div>
+<!--
+<sidebar></sidebar>
+ FORMULARIO -->
+

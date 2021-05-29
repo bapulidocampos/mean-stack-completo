@@ -1,0 +1,101 @@
+
+<div class="col-lg-8">
+<h1 class="h1-strong">{{title}}</h1>
+<div class="people">
+<!--LISTADO -->	
+	<!-- recorro todos los usuario. variable user por cada iteracion de los usuarios-->
+	<!-- se va crea un div por cada usuario que tenga guardado
+	*ngIf="user.role=='ROLE_ADMIN' && user.role=='ROLE_USER'" -->
+	<div *ngFor="let user of users" class="item-user"  >
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="image-user pull-left">
+					<a href="#">
+				<img src="{{ url +'get-image-user/' + user.image}} "*ngIf="user
+				.image"/>
+				<img src="assets/user.png" class="avatar-default"*ngIf="!user
+				.image"/>
+					</a>
+				</div>
+			
+
+			<div class="user-name pull-left">
+				<p class="name-surname">
+				
+					<a [routerLink]="['/perfil',user._id]"*ngIf="user.role=='ROLE_TRAINER'">
+					{{user.name + ' ' + user.surname}} |  (Entrenador)
+					</a>
+					<a [routerLink]="['/perfil',user._id]"*ngIf="user.role=='ROLE_USER'">
+					{{user.name + ' ' + user.surname}} 
+					</a>
+					<a [routerLink]="['/perfil',user._id]"*ngIf="user.role=='ROLE_ADMIN'">
+					{{user.name + ' ' + user.surname}} |  (Administrador)
+					</a>
+				</p>
+				<p class="nickname">
+					 {{user.nick}}
+				</p>
+			</div>
+		<!-- botones suguir y dejar de seguir     -->
+<!--
+ 
+				<div class="pull-right" *ngIf="user._id != identity._id">
+-->
+					<!-- < a 0 por lo tanto no estoy sigueidno al usuario y me aparece el boton seguir -->
+				<!--
+					<button class="btn btn-success" *ngIf="follows.indexOf(user._id)<0"
+					(click)="followUser(user._id)">
+					<span class="glyphicon glyphicon-plus-sign"></span>
+					Seguir
+					</button>
+				-->
+						<!--
+					<button class="btn btn-primary" 
+							*ngIf="follows.indexOf(user._id)>=0"
+							(mouseenter)="mouseEnter(user._id)"
+							(mouseleave)="mouseLeave(user._id)"
+							(click)="UnfollowUser(user._id)"
+
+								[class.btn-danger]="user._id == followUserOver"
+							>
+						-->
+							<!--; else following -->
+<!--
+						<span *ngIf="user._id == followUserOver; else following">	
+							<span class="glyphicon glyphicon-minus-sign"></span>
+						Dejar de Seguir
+							</span>
+
+						<ng-template #following >	
+							<span class="glyphicon glyphicon-ok-sign"></span>
+						Siguiendo
+						</ng-template>
+
+						
+							
+					</button>
+
+				</div>
+-->
+
+
+
+		</div>
+		</div>
+	</div>
+<!--PAGINACION-->
+<ul class="pagination pull-right">
+	<li *ngIf="page>1"><a [routerLink]="['/gente',prev_page]">Anterior</a></li>
+	<!--numero total de paginas es diferente a la pag actual-->
+	<li *ngIf="pages != page"><a [routerLink]="['/gente',next_page]">Siguiente</a></li>
+</ul>
+
+
+</div>
+
+
+
+
+</div>
+<sidebar></sidebar>
+<div class="clearfix"></div>

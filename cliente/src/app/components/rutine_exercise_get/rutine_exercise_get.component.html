@@ -1,0 +1,200 @@
+
+
+
+
+
+<!-- Aqui va si esta mirando mi propio perfil logueado  -->
+
+
+<div id="publications pull-left" >
+	<div *ngFor="let publication of publications" class="item-publication">
+		<div class="panel panel-default">
+			<div class="panel-body">
+
+							<div class="image-user pull-left">
+									<a href="#">
+								<img src="{{ url +'get-image-user/' + publication.entrenador.image}} "*ngIf="publication.entrenador.image"/>
+								<img src="assets/user.png" class="avatar-default"*ngIf="!publication.entrenador.image"/>
+									</a>
+								</div>
+
+				<div>
+					<span class="user-name">
+					{{publication.entrenador.name + ' ' + publication.entrenador.surname}}
+
+					</span>
+
+					&nbsp;|&nbsp;
+			
+
+						<span class="date">
+					{{ (publication.created_at | amFromUnix) | amLocale: 'es' | amTimeAgo}} 
+				<!--	{{ publication.created_at | amLocale: 'es'|   amTimeAgo}}-->
+	              
+					</span>  
+					
+				</div>
+
+				
+				<h4 class="publication-text pull-left">
+					{{publication.text }}
+				
+
+				</h4>
+
+				
+				
+<!-- *ngIf="publication.user._id != identity._id" -->
+				<div class="pull-right" *ngIf="publication.user._id != identity._id">
+						&nbsp;
+					<!-- Button HTML (to Trigger Modal) -->
+				
+					<a href="#myModal{{publication._id}}" class="btn btn-large btn-danger"
+					 data-toggle="modal"*ngIf="showImage!=publication._id">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+
+				
+					    
+					<!-- Modal HTML -->
+					<div id="myModal{{publication._id}}" class="modal fade">
+					    <div class="modal-dialog">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title">¿Estas Seguro que  quieres eliminar la publicacion?</h5>
+					                <button type="button" class="close" data-dismiss="modal">&times;</button>
+					            </div>
+					            <div class="modal-body">
+					                <p>Si la borras no podras recuperarla</p>
+					             <p>{{publication.text}}</p>
+					            </div>
+					            <div class="modal-footer">
+					                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					                <button type="button" class="btn btn-primary"(click)="deletePublication(publication._id)"data-dismiss="modal">Borrar la publicacion</button>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+
+
+				
+				</div>
+
+
+<!--pull right-->
+<div class="pull-right"*ngIf="publication.file != 'null'&& publication.filev == 'null'
+|| publication.file == 'null'&& publication.filev != 'null'|| publication.file != 'null'
+				">
+					<button class="btn btn-warning pull-right"(click)="showThisImage(publication._id)" 
+					*ngIf="showImage!=publication._id">
+
+						<span class="glyphicon glyphicon-picture"></span>
+					</button>
+
+				
+
+					<button class="btn btn-danger pull-right"(click)="hideThisImage(publication._id)" 
+					*ngIf="showImage==publication._id">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					</button>
+</div>
+<!-- *ngIf="publication.file !='null' && publication.filev =='null' && showImage==publication._id ||publication.filev !='null' && publication.file=='null'&& showImage==publication._id " -->
+				<div class="col-lg-12"*ngIf="showImage==publication._id">
+					
+				
+					
+
+				
+
+								<table class="table">
+								  <thead>
+								    <tr>
+								      <th scope="col">#</th> 
+								      <th scope="col">Ejercicio</th>
+								      
+								      <th scope="col">Instrucción</th>
+								    </tr>
+								  </thead>
+								  <tbody *ngFor="let roww of publication.friends;let i=index">
+								    <tr >
+								      <th scope="row"  >{{i+1}}</th> 
+								<td >{{roww.name}}
+
+								</td>
+								<td>   {{publication.instruciones[i]}}  </td>
+								
+							
+								<button class="btn btn-success  "(click)="ver_video(roww.filev)"  >
+								Ver Video 
+								</button>
+								 
+								    </tr>
+
+
+								   
+								    
+								  </tbody>
+								</table>
+
+
+
+
+
+
+<video *ngIf="jum  " class="pull-left" width="450" height="240" autoplay controls loop  >
+						<source src="{{url+'get-image-pubb/'+hole}}" type="video/mp4">
+
+						</video>
+
+
+
+								
+
+
+					
+					
+				
+	
+				</div>
+
+
+
+
+
+
+
+
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+<!--practicando REGISTRO DE LOS EJERCICIOS  -->
+
+<p>hola pues parcetito estoy en ejercicios ñiño</p>
+
+
+
+<button class="btn btn-success pull-left"(click)="vector()"  >
+			llevar vector
+</button>
+	
+
+
+
+<div class="col-lg-12 text-center" >
+	<p>
+		<button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+			Ver mas publicaciones
+		</button>
+	</p> 
+</div>
+<!--<rutine_exercise></rutine_exercise>-->
+ 

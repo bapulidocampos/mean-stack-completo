@@ -1,0 +1,166 @@
+
+<div class="col-lg-5">
+<h1 class="h1-strong">{{title}}</h1>
+<!--cuando si el status es igual a success muestre un texto registro completado
+link para el formulario del login, un enlace dinamico que me cambia de seccion
+ pero no le recarga la pagina -->
+
+
+<div class="alert alert-success" *ngIf="status =='success'">
+	Registro completado correctamente,<a [routerLink]="['/login']">identificate aqui
+	</a>
+
+</div>
+    
+<div class="alert alert-danger" *ngIf="status =='error'">
+	El registro no ha podido completarse, quizas tu email o nickname ya esta en uso, intentalo de nuevo con otro datos
+
+</div>
+
+
+
+<!--formulario de angular se va llamar registyer form de tipo ngform
+   cuando hagamos submit(lo enviemos ) se va a ejecutar un metodo     
+(ngSubmit)="onSubmit(registerForm)"
+       -->
+	<form #registerForm="ngForm"   class="col-lg-12">
+		
+
+		<p>
+<label>Nombre</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class=
+"form-control" required/>
+			<span *ngIf="!name.valid && name.touched">
+			El nombre es obligatorio!!
+			</span>
+		</p>
+
+			<p>
+<label>Apellidos</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class=
+"form-control" required/>
+			<span *ngIf="!surname.valid && surname.touched">
+			Los apellidos es obligatorio!!
+			</span>
+		</p>
+
+<p>
+<label>Fecha de nacimiento</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="date" name="date_birth" #date_birth="ngModel" [(ngModel)]="user.date_birth" class=
+"form-control" required/>
+			<span *ngIf="!date_birth.valid && date_birth.touched">
+			La fecha de nacimiento es obligatoria!!
+			</span>
+		</p>
+
+ 
+			<p>
+<label>Apodo</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class=
+"form-control" required/>
+			<span *ngIf="!nick.valid && nick.touched">
+			El apodo es obligatorio!!
+			</span>
+		</p>
+
+<p>
+<label>Sexo</label>
+<!--
+<input type="text" name="role" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required/>-->
+
+<select name="select" #sexo="ngModel" [(ngModel)]="user.sexo" class=
+"form-control" required >
+  <option value="masculino">masculino</option>
+  <option value="femenino" >femenino</option>
+</select>
+  <!--selected-->
+			<span *ngIf="!sexo.valid && sexo.touched">
+			El campo sexo  es obligatorio!!
+			</span>
+</p>
+
+
+<p>
+<label>Alergia</label>
+<!--
+<input type="text" name="role" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required/>-->
+
+<select name="select" id="martes"  class=
+"form-control" required >
+  <option value="mani">mani</option>
+  <option value="leche" >leche</option>
+   <option value="queso">queso</option>
+</select>
+  <!--selected-->
+			<span *ngIf="!sexo.valid && sexo.touched">
+			El campo sexo  es obligatorio!!
+			</span>
+	<button class="btn btn-success  "(click)="onSubmitemartes()"  >
+							Asignar
+		</button> 
+</p>
+	<div *ngFor="let publication of martescomida" >
+			{{publication}}
+		</div>
+
+
+
+			<p>
+<label>Correo electronico</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class=
+"form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+			<span *ngIf="!email.valid && email.touched">
+			El correo no es correcto!!
+			</span>
+		</p>
+
+			<p>
+<label>Contraseña</label>
+<!-- [(ngModel)] nos eprmite modificar el valor de una propiedad de la clase componente
+hacemos lo que queramos -->
+<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class=
+"form-control" required/>
+			<span *ngIf="!password.valid && password.touched">
+			La contraseña es obligatoria!!
+			</span>
+		</p>
+
+	<p>
+<label>Rol</label>
+<!--
+<input type="text" name="role" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required/>-->
+
+<select name="select" #role="ngModel" [(ngModel)]="user.role" class=
+"form-control" required >
+  <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+  <option value="ROLE_USER" >ROLE_USER</option>
+  <option value="ROLE_TRAINER">ROLE_TRAINER</option>
+</select>
+  <!--selected-->
+			<span *ngIf="!role.valid && role.touched">
+			El rol es obligatoria!!
+			</span>
+		</p>
+
+
+
+
+<input type="submit" value="{{title}}" (click)="onSubmit(registerForm)" class="btn btn-success"[disabled]=
+"!registerForm.form.valid"/>
+
+	</form>
+</div>
+

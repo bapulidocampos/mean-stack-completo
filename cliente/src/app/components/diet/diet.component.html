@@ -1,0 +1,177 @@
+
+
+<!-- formulario de publicaciones -->
+
+
+<div id ="new-publication" class="col-lg-4 pull-left panel panel-default"*ngIf="this.identity._id!=this.user">
+<div class="alert alert-success" *ngIf="status=='success'">
+	Dieta enviada correctamente
+</div>
+<div class="alert alert-danger" *ngIf="status=='error'">
+	{{mensaje}}. Dieta no enviada
+</div>
+
+<!--	<form #newPubForm="ngForm"(ngSubmit)="onSubmit(newPubForm,$event);" class="col-lg-10"></form>-->	
+ 
+<!--
+                                        (ngSubmit)="onSubmit(newPubForm,$event);"               -->
+
+            <form #newPubForm="ngForm" class="col-lg-10" >
+
+	<p>
+		<label>Descripcion de dieta</label>
+		<textarea name="text" #text="ngModel"[(ngModel)]="publication.text" class="form-control" required></textarea>
+		<span *ngIf="!text.valid && text.touched">
+			El texto de la publicacion es obligatorio
+		</span>
+	</p>
+	
+
+		<p> 
+  				<label>Lunes:  </label>
+	           
+					 <select *ngIf="follows" id="lunes"name="lunes"#lunes
+				
+					  >
+					 <option *ngFor="let follow of follows" value="{{follow.text}}">
+					 {{follow.text}}</option>
+							
+					</select>
+					<br>
+
+						<button class="btn btn-success  "(click)="onSubmitelunes()"  >
+						Asignar
+						</button> 
+	               
+		
+			
+		</p>
+			<div *ngFor="let publication of lunescomida" >
+			{{publication}}
+		</div>
+
+<br>
+
+			<p>
+  				<label>Martes:  </label>
+	           
+					 <select *ngIf="follows" id="martes" name="martes"#martes
+					  >
+					 <option *ngFor="let follow of follows" value="{{follow.text}}">
+					 {{follow.text}}</option>
+							
+					</select>
+					<br>
+	               <button class="btn btn-success  "(click)="onSubmitemartes()"  >
+							Asignar
+						</button> 
+		</p>
+		<div *ngFor="let publication of martescomida" >
+			{{publication}}
+		</div>
+<br>
+			<p>
+  				<label>Miercoles</label>
+	           
+					 <select *ngIf="follows" id="miercoles"name="miercoles" #miercoles
+					
+					  >
+					 <option *ngFor="let follow of follows" value="{{follow.text}}">
+					 {{follow.text}}</option>
+							
+					</select>
+					<br>
+					 <button class="btn btn-success  "(click)="onSubmitemiercoles()"  >
+							Asignar
+						</button> 
+	               
+	
+			</p>
+			<div *ngFor="let publication of miercolescomida" >
+			{{publication}}
+		</div>
+<br>
+			<p>
+  				<label>Jueves</label>
+	           
+					 <select *ngIf="follows" id="jueves"name="jueves" #jueves
+					
+					  >
+					 <option *ngFor="let follow of follows" value="{{follow.text}}">
+					 {{follow.text}}</option>
+							
+					</select>
+					<br>
+	             <button class="btn btn-success  "(click)="onSubmitejueves()"  >
+							Asignar
+						</button> 
+			</p>
+			<div *ngFor="let publication of juevescomida" >
+			{{publication}}
+		</div>
+			<br>
+
+<p>
+  				<label>Vierne</label>
+	           
+					 <select *ngIf="follows" id="viernes"name="viernes" #viernes
+					
+					  >
+					 <option *ngFor="let follow of follows" value="{{follow.text}}">
+					 {{follow.text}}</option>
+							
+					</select>
+					<br>
+					<button class="btn btn-success  "(click)="onSubmiteviernes()"  >
+							Asignar
+						</button> 
+	               
+		
+			
+			</p>
+				<div *ngFor="let publication of viernescomida" >
+							{{publication}}
+						</div>
+
+		
+
+
+<!-- fileInput es para darle un id y poder resetear el subir imagen-->
+<!--
+	<p>
+		<label>Sube tu foto</label>
+		
+		<input #fileInput type="file" placeholder="subir imagen"(change)="fileChangeEvent($event)"/>
+	</p>
+-->
+	<input  type="submit" id="boton" value=" Guardar" (click)="onSubmit(newPubForm,$event)"class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	 
+	
+	<!--   
+		[disabled]= " pase=='false'" 
+!newPubForm.form.valid &&
+!newPubForm.form.valid &&
+	<input type="submit" value="Enviaree" class="btn btn-success"[disabled]="!newPubForm.form.valid"/>
+	 <button mat-button color="primary"(ngSubmit)="agregar_vector(newPubForm);">Primary</button>-->
+	 	
+	
+	</form>	
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
